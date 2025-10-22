@@ -25,7 +25,7 @@ ROOT_URL = "https://replays.rouny-ss14.com/replays/alamo"
 HREF_FINDER = re.compile(r'<a href="([\d]+)\/">')
 REPLAY_FINDER = re.compile(r'<a href="([^"]+\.zip)">')
 TIMEOUT = 5
-BACKFILL_DAYS = 31
+BACKFILL_DAYS = 7
 
 RoundSummary = t.Dict[str, t.Any]
 
