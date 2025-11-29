@@ -1,35 +1,35 @@
-name: Update
+# name: Update
 
-on:
-  schedule:
-    - cron: '0 */2 * * *'
+# on:
+#   schedule:
+#     - cron: '0 */2 * * *'
 
-jobs:
-    uppdate:
-        runs-on: ubuntu-latest
-        permissions:
-          contents: read
-        environment: production
+# jobs:
+#     update:
+#         runs-on: ubuntu-latest
+#         permissions:
+#           contents: read
+#         environment: production
 
-        steps:
-          - uses: actions/checkout@v5
+#         steps:
+#           - uses: actions/checkout@v5
 
-          - name: Set up SSH key
-            uses: webfactory/ssh-agent@v0.9.1
-            with:
-              ssh-private-key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
+#           - name: Set up SSH key
+#             uses: webfactory/ssh-agent@v0.9.1
+#             with:
+#               ssh-private-key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
 
-          - name: Set up known_hosts
-            run: |
-              mkdir -p ~/.ssh/
-              echo "$SERVER_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-              cat ~/.ssh/known_hosts
-            shell: bash
-            env:
-              SERVER_SSH_KNOWN_HOSTS: ${{secrets.SERVER_SSH_KNOWN_HOSTS}}
+#           - name: Set up known_hosts
+#             run: |
+#               mkdir -p ~/.ssh/
+#               echo "$SERVER_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+#               cat ~/.ssh/known_hosts
+#             shell: bash
+#             env:
+#               SERVER_SSH_KNOWN_HOSTS: ${{secrets.SERVER_SSH_KNOWN_HOSTS}}
 
-          - name: Deploy
-            run: |
-              ssh diraven@diraven.com "cd services/rmc14_stats && docker compose pull && docker compose run app"
-            env:
-              SERVER_SSH_HOST: ${{secrets.SERVER_SSH_HOST}}
+#           - name: Deploy
+#             run: |
+#               ssh diraven@diraven.com "cd services/rmc14_stats && docker compose pull && docker compose run app"
+#             env:
+#               SERVER_SSH_HOST: ${{secrets.SERVER_SSH_HOST}}
